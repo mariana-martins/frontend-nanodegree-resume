@@ -13,16 +13,16 @@ var bio = {
     biopic: "images/fry.jpg",
     display: function() {
         var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-        $("#header"). prepend(formattedRole);
+        $("#header").prepend(formattedRole);
 
         var formattedName = HTMLheaderName.replace("%data%", bio.name);
-        $("#header"). prepend(formattedName);
+        $("#header").prepend(formattedName);
 
         var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
-        $("#header"). append(formattedBioPic);
+        $("#header").append(formattedBioPic);
 
         var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-        $("#header"). append(formattedWelcomeMsg);
+        $("#header").append(formattedWelcomeMsg);
 
         var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
         $(".flex-box").prepend(formattedMobile);
@@ -39,7 +39,7 @@ var bio = {
         if (bio.skills.length > 0) {
             $("#header").append(HTMLskillsStart);
 
-            for (skill in bio.skills) {
+            for (var skill = 0; skill < bio.skills.length; skill++) {
                 var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
                 $("#skills").append(formattedSkill);
             }
@@ -75,7 +75,7 @@ var work = {
         }
     ],
     display: function () {
-        for(job in work.jobs){
+        for(var job = 0; job < work.jobs.length; job++){
             $("#workExperience").append(HTMLworkStart);
 
             var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
@@ -85,8 +85,7 @@ var work = {
 
             $(".work-entry:last").append(formattedEmployerTittle);
 
-            var formattedDates = HTMLworkDates
-                .replace("%data%", work.jobs[job].dates);
+            var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
             $(".work-entry:last").append(formattedDates);
 
             var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
@@ -113,21 +112,21 @@ var projects = {
             images: ["https://placeimg.com/197/148/tech", "https://placeimg.com/197/148/tech"]
         }
     ],
-    display: function (selector) { //TODO: Melhorar esse for1
-        for (code in projects.project){
+    display: function (selector) {
+        for (var project = 0; project < projects.project.length; project++) {
             $("#projects").append(HTMLprojectStart);
 
-            var formattedTitle = HTMLprojectTitle.replace("%data%", projects.project[code].title);
+            var formattedTitle = HTMLprojectTitle.replace("%data%", projects.project[project].title);
             $(".project-entry:last").append(formattedTitle);
 
-            var formattedDates = HTMLprojectDates.replace("%data%", projects.project[code].dates);
+            var formattedDates = HTMLprojectDates.replace("%data%", projects.project[project].dates);
             $(".project-entry:last").append(formattedDates);
 
-            var formattedDescription = HTMLprojectDescription.replace("%data%", projects.project[code].description);
+            var formattedDescription = HTMLprojectDescription.replace("%data%", projects.project[project].description);
             $(".project-entry:last").append(formattedDescription);
 
-            for (image in projects.project[code].images){
-                var formattedImages = HTMLprojectImage.replace("%data%", projects.project[code].images[image]); //TODO: Corrigir bug das imagens!
+            for (var image = 0; image < projects.project[project].images.length; image++){
+                var formattedImages = HTMLprojectImage.replace("%data%", projects.project[project].images[image]);
                 $(".project-entry:last").append(formattedImages);
             }
         }
@@ -164,7 +163,7 @@ var education = {
         }
     ],
     display: function () {
-        for (school in education.schools) {
+        for (var school = 0; school < education.schools.length; school++) {
             $("#education").append(HTMLschoolStart);
 
             var formattedName = HTMLschoolName.replace("%data%", education.schools[school].name);
@@ -187,7 +186,7 @@ var education = {
 
         $("#education").append(HTMLonlineClasses);
 
-        for (course in education.onlineCourses) {
+        for (var course = 0; course < education.onlineCourses; course++) {
             $("#education").append(HTMLschoolStart);
 
             var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
@@ -210,8 +209,7 @@ var education = {
 
 function callEverything() {
     $("#mapDiv").append(googleMap);
-
-
+    
     bio.display();
     work.display();
     projects.display();
@@ -219,9 +217,3 @@ function callEverything() {
 }
 
 callEverything();
-
-$(document).click(function(loc) {
-    var y = loc.pageY;
-    var x = loc.pageX;
-    logClicks(x, y);
-});
