@@ -186,7 +186,7 @@ var education = {
 
         $("#education").append(HTMLonlineClasses);
 
-        for (var course = 0; course < education.onlineCourses; course++) {
+        for (var course = 0; course < education.onlineCourses.length; course++) {
             $("#education").append(HTMLschoolStart);
 
             var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
